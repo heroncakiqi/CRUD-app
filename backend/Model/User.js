@@ -5,7 +5,6 @@ const validator = require('validator');
 const UserSchema = new Schema({
   id: {
     type: String,
-    unique: true
   },
   user: {
     type: String,
@@ -27,17 +26,22 @@ const UserSchema = new Schema({
 });
 
 UserSchema.pre('save', async function(next) {
-    const getId = async () => {
-      const id = Math.floor(Math.random() * (9999 - 0));
-      this.id = id.toString();
-      const userWithId = await this.constructor.findOne({ id: id});
-      if(userWithId.length) {
-        getId();
-      }else{
-        next();
-      }
+  try{
+    await getId(this, next);
+  }catch(err) {
+    console.log(err);
   }
-  getId();
 });
+
+async function getId(user, cb) {
+  const id = Math.floor(Math.random() * (9999 - 0));
+  user.id = id.toString();
+  const userWithId = await user.constructor.findOne({id: id});
+  if(userWithId.length) {
+   await getId(user, cb);
+  }else{
+    cb();
+  }
+}
 
 module.exports =  mongoose.model("User", UserSchema);
