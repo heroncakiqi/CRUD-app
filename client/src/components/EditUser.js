@@ -15,7 +15,7 @@ export default class EditUser extends Component {
     error: {}
   }
   async componentDidMount() {
-    const res = await axios.get(`/api/users/${this.props.match.params.id}`);
+    const res = await axios.get(`https://reactexpress-imakxffofs.now.sh/api/users/${this.props.match.params.id}`);
     this.setState({user: res.data.user, email: res.data.email} );
     document.getElementsByTagName('LABEL')[0].classList.add("active");
     document.getElementsByTagName('LABEL')[3].classList.add("active");
@@ -25,7 +25,7 @@ export default class EditUser extends Component {
   }
   handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post(`/api/user/${this.props.match.params.id}/edit`, this.state);
+    const res = await axios.post(`https://reactexpress-imakxffofs.now.sh/api/user/${this.props.match.params.id}/edit`, this.state);
     if(res.data.status === 400) {
       this.setState({error :{ ...res.data }});
     } else {

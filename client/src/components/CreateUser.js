@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
-import { Row, Input, Button, Icon } from 'react-materialize';
 
 import Form from './Form';
 
@@ -22,7 +21,7 @@ class CreateUser extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post('/api/user/create', this.state);
+    const res = await axios.post('https://reactexpress-imakxffofs.now.sh/api/user/create', this.state);
     if(res.data.status === 400){
       this.setState({error :{ ...res.data }});
     }else {

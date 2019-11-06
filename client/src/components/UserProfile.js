@@ -11,7 +11,7 @@ export default class UserProfile extends Component {
     loading: true,
   }
   async componentDidMount() {
-    const res = await axios.get(`/api/users/${this.props.match.params.id}`);
+    const res = await axios.get(`https://reactexpress-imakxffofs.now.sh/api/users/${this.props.match.params.id}`);
     
     this.setState({data: res.data, loading: false});
     console.log(this.state);

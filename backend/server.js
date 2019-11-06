@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const routes = require('./routes/index');
 
@@ -9,6 +10,9 @@ const app = express();
 // use body-parser;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// middleware
+app.use(cors());
 
 // add the routes
 app.use('/api', routes);

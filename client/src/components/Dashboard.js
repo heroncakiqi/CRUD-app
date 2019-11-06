@@ -14,12 +14,12 @@ class Dashboard extends Component {
 
   async componentDidMount() {
     this.setState({ loading: true });
-    const res = await axios.get('/api/users');
+    const res = await axios.get('https://reactexpress-imakxffofs.now.sh/api/users');
     this.setState({ loading: false, data: res.data });
   }
 
   rerender = async () => {
-    const res = await axios.get('/api/users');
+    const res = await axios.get('https://reactexpress-imakxffofs.now.sh/api/users');
     this.setState({ data: res.data });
   }
 
